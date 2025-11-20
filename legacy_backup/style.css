@@ -1,0 +1,215 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+header {
+  display: flex;
+  /* O header agora ocupa a largura total e é fixo no topo */
+
+  width: 100%;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent; /* Fundo transparente por padrão */
+  color: rgb(255, 255, 255);
+  position: fixed; /* Usamos 'fixed' para mantê-lo sempre no topo da tela */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Garante que o header fique sobre outros elementos */
+  transition: background-color 0.4s ease; /* Animação suave para a cor de fundo */
+}
+
+/* Nova classe que será adicionada com JavaScript */
+header.header-scrolled {
+  background-color: #242424; /* Fundo preto quando a página é rolada */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+}
+header .logo {
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding-left: 40px; /* Adiciona um espaçamento para não colar na borda */
+}
+/* Correção da sintaxe do :hover */
+header .logo:hover {
+  transition: all 0.3s ease;
+  color: rgb(255, 0, 0);
+}
+/* Estilo para os links dentro do header para que se pareçam com o texto normal */
+header a {
+  color: inherit; /* Herda a cor do elemento pai (branco do header) */
+  text-decoration: none; /* Remove o sublinhado padrão dos links */
+}
+
+header ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding-right: 40px; /* Adiciona um espaçamento para não colar na borda */
+}
+header ul li {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+/* Efeito hover para cada item da lista */
+header ul li:hover {
+  color: rgb(255, 0, 0);
+  transform: scale(1.1);
+}
+
+/* Ajuste para o conteúdo principal não ficar escondido atrás do header fixo */
+.alcateia {
+  position: relative; /* Necessário para o posicionamento absoluto da imagem filha */
+  height: 100vh; /* A seção ocupa a altura total da tela */
+  display: flex; /* Para centralizar o conteúdo sobre a imagem */
+  justify-content: center;
+  align-items: center;
+  color: white; /* Garante que o texto seja visível sobre a imagem escura */
+}
+
+@media screen and (max-width: 835px) {
+  header {
+    justify-content: center; /* Centraliza o conteúdo do header */
+    padding: 20px; /* Ajusta o padding para telas menores */
+  }
+  header ul li {
+    display: none;
+  }
+  header .logo {
+    justify-content: left;
+    padding: 20; /* Remove o padding esquerdo desnecessário */
+  }
+}
+
+.bgWallpapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+  z-index: -1; /* Coloca a imagem atrás do conteúdo da seção */
+}
+
+.alcateiaLogo {
+  position: absolute;
+  width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: grayscale(122);
+}
+
+@keyframes fadeInLogo {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95); /* Começa um pouco menor e invisível */
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); /* Termina no tamanho normal e visível */
+  }
+}
+
+.alcateiaLogo {
+  position: absolute;
+  max-width: 500px;
+  width: 80%;
+  filter: grayscale(1);
+  animation: fadeInLogo 1.5s ease-out forwards;
+}
+
+.sobre {
+  background-color: #e2e2e2;
+  height: 100vh;
+}
+.sobre-infos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.sobre-infos h1 {
+  margin-top: 150px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: #000000;
+  /* Animação */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.sobre-infos p {
+  margin-top: 100px;
+  max-width: 30ch;
+  font-size: 20px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #5a5a5a;
+  /* Animação com um pequeno atraso */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.5s;
+}
+
+.sobre-infos.fade-in h1,
+.sobre-infos.fade-in p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.disciplina {
+  position: relative; /* Garante que a imagem se posicione em relação a esta seção */
+  height: 100vh;
+  display: flex; /* Adicionado para centralizar o conteúdo */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+}
+.teamPhoto {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Coloca a imagem atrás do conteúdo */
+}
+.disciplina-infos {
+  max-width: 50ch;
+  font-size: 20px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #ffffff; /* Cor alterada para branco para melhor contraste */
+  z-index: 1; /* Garante que o texto fique na frente da imagem */
+  /* Adicionamos a transição ao container para um efeito suave */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.disciplina-infos h1 {
+  margin-bottom: 100px;
+  color: #ffffff;
+  font-size: 3rem;
+  font-family: "Oswald", sans-serif;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Sombra para legibilidade */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s;
+}
+.disciplina-infos p {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-family: "Roboto", sans-serif;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Sombra para legibilidade */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out 0.5s, transform 0.6s ease-out 0.5s;
+}
+
+.disciplina-infos.fade-in h1,
+.disciplina-infos.fade-in p {
+  opacity: 1;
+  transform: translateY(0);
+}
